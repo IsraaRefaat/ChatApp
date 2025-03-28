@@ -41,17 +41,17 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        http.csrf(customizer -> customizer.disable())
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers("user/register","user/login")
-                        .permitAll()
-                        .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+//        http
+//
+//                .csrf(csrf -> csrf.disable()) // Disable CSRF for WebSocket
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/user/register", "/user/login" , "/ws/**").permitAll() // Public endpoints
+//                        .anyRequest().permitAll()
+//                )
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless session
+//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT filter before authentication
+//                .httpBasic(httpBasic -> httpBasic.disable()); // Disable Basic Authentication
+//
         return http.build();
     }
 
